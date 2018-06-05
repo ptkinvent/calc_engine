@@ -22,7 +22,7 @@ public:
      * Constructor. Reads in integers from a file.
      * @param filename
      */
-    IntStreamer(std::string filename);
+    IntStreamer(const std::string &filename);
 
     /**
      * Constructor. Reads in integers from a character array

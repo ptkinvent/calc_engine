@@ -29,10 +29,11 @@ public:
 
     /**
      * Multiplies the provided numbers together
-     * @param ints List of integers
-     * @return Result after multiplication
+     * @param[in] ints Integers to calculate on
+     * @param[out] result Final result after calculation
+     * @return Success state, 0 for success, 1 for fail
      */
-    virtual double calc(std::vector<int> ints);
+    virtual int calc(std::vector<int> ints, double &result);
 };
 
 }

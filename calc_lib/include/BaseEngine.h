@@ -55,11 +55,11 @@ public:
 
     /**
      * Performs the calculation for this calculation engine
-     * @param prevTotal Output from the previous calculation
-     * @param num New integer
-     * @return New output after calculation
+     * @param[in] ints Integers to calculate on
+     * @param[out] result Final result after calculation
+     * @return Success state, 0 for success, 1 for fail
      */
-    virtual double calc(std::vector<int> ints) = 0;
+    virtual int calc(std::vector<int> ints, double &result) = 0;
 
     /**
      * Factory method. Creates an engine of the given type
@@ -70,9 +70,9 @@ public:
 
 protected:
     /**
-     * The type of input allowed for this engine. NOTE: This does not enforce
-     * the best type safety here. Probably the enum itself should be classed
-     * and operator| and operator& should be overridden.
+     * The type of input allowed for this engine.
+     * NOTE: This does not enforce the best type safety here. Given more time
+     * one could make the enum classed and override operator| and operator&.
      */
     int _allowedInputType;
 };

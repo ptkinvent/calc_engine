@@ -16,8 +16,14 @@ cengine::DividerEngine::DividerEngine()
 
 
 
-double cengine::DividerEngine::calc(std::vector<int> ints)
+int cengine::DividerEngine::calc(std::vector<int> ints, double &result)
 {
+    if (ints.empty())
+    {
+        std::cerr << "DividerEngine: No integers to divide" << std::endl;
+        return 1;
+    }
+
     double total(ints[0]);
 
     for (unsigned int i=1; i<ints.size(); i++)
@@ -25,13 +31,15 @@ double cengine::DividerEngine::calc(std::vector<int> ints)
         // Perform error checking
         if (ints[i] == 0)
         {
-            std::cerr << "DividerEngine: Can't divide by zero, exiting" << std::endl;
-            exit(1); // TODO: Is this the right way to do this?
+            std::cerr << "DividerEngine: Can't divide by zero" << std::endl;
+            result = -1;
+            return 1;
         }
 
         // Divide into total
         total /= ints[i];
     }
 
-    return total;
+    result = total;
+    return 0;
 }

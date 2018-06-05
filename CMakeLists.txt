@@ -4,8 +4,8 @@ project(calc VERSION 1.0)
 
 
 # Build options
-option(BUILD_GTEST "Build gtests" ON)
-option(BUILD_DOC "Build doxygen" OFF)
+option(BUILD_GTEST "Build GTests" ON)
+option(BUILD_DOC "Build Doxygen" ON)
 
 
 # Set up environment

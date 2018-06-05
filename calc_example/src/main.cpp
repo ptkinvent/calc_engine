@@ -71,8 +71,16 @@ int main(int argc, char *argv[])
         std::cerr << "Main: " << it->first << " does not accept this input type, exiting" << std::endl;
         return 1;
     }
-    double result = engine->calc(intStreamer->getInts());
-    std::cout << "Result: " << result << std::endl;
+    double result;
+    int ret = engine->calc(intStreamer->getInts(), result);
+    if (ret == 0)
+    {
+        std::cout << "Main: Result: " << result << std::endl;
+    }
+    else
+    {
+        std::cout << "Main: Error in calculation engine" << std::endl;
+    }
 
     // Cleanup
     delete intStreamer;

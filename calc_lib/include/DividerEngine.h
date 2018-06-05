@@ -2,7 +2,8 @@
  * @author P. Sahay
  * @date 6/4/18
  * @copyright Sikorsky Aircraft Corp.
- * @brief 
+ * @brief Engine that divides all its integers one after another. Works with
+ *        both a file list and argument list.
  */
 
 #ifndef CALC_DIVIDERENGINE_H
@@ -29,10 +30,11 @@ public:
 
     /**
      * Divides all the integers one after another
-     * @param ints List of integers
-     * @return Result after division
+     * @param[in] ints Integers to calculate on
+     * @param[out] result Final result after calculation
+     * @return Success state, 0 for success, 1 for fail
      */
-    virtual double calc(std::vector<int> ints);
+    virtual int calc(std::vector<int> ints, double &result);
 };
 
 }

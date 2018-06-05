@@ -17,8 +17,14 @@ cengine::MultiplierEngine::MultiplierEngine()
 
 
 
-double cengine::MultiplierEngine::calc(std::vector<int> ints)
+int cengine::MultiplierEngine::calc(std::vector<int> ints, double &result)
 {
+    if (ints.empty())
+    {
+        std::cerr << "MultiplierEngine: No integers to multiply" << std::endl;
+        return 1;
+    }
+
     double total(1);
 
     for (auto i : ints)
@@ -26,19 +32,22 @@ double cengine::MultiplierEngine::calc(std::vector<int> ints)
         // Special behavior: If total reaches 0, no need to keep going
         if (total == 0)
         {
-            return total;
+            result = total;
+            return 0;
         }
 
         // Perform error checking
         if (total * i < total)
         {
-            std::cerr << "MultiplierEngine: Result has overflowed, exiting" << std::endl;
-            exit(1); // TODO: Is this the right way to do this?
+            std::cerr << "MultiplierEngine: Result has overflowed" << std::endl;
+            result = -1;
+            return 1;
         }
 
         // Multiply into total
         total *= i;
     }
 
-    return total;
+    result = total;
+    return 0;
 }

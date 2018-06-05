@@ -9,27 +9,31 @@
 #include <iostream>
 #include "IntStreamer.h"
 
-cengine::IntStreamer::IntStreamer(std::string filename) : _inputType(BaseEngine::FILE_LIST)
+cengine::IntStreamer::IntStreamer(const std::string &filename) : _inputType(BaseEngine::FILE_LIST)
 {
     std::ifstream infile;
-    int num;
-
-    filename = filename + ".txt";
+    long long int num;
 
     // Open the file
-    infile.open(filename);
+    infile.open(filename + ".txt");
 
     // Error checking
     if (!infile)
     {
-        std::cerr << "IntStreamer: Unable to open file " << filename << std::endl;
-        exit(1); // Terminate with error. Ideally this error should be caught
+        std::cerr << "IntStreamer: Unable to open file " << filename << ".txt" << std::endl;
+        return;
     }
 
-    // Read contents of the file
+    // Read contents of the file. fstream takes care of int overflow and bad data
     while (infile >> num)
     {
-        _ints.push_back(num);
+        if (num > INTMAX_MAX)
+        {
+            std::cerr << "IntStreamer: Integer overflow, skipping entry" << num << std::endl;
+            continue;
+        }
+        _ints.push_back((int) num);
+        std::cout << "Pushing back " << num << std::endl;
     }
 
     // Close the file
@@ -42,6 +46,10 @@ cengine::IntStreamer::IntStreamer(char **ints, int num_ints) : _inputType(BaseEn
 {
     for (unsigned int i=0; i < num_ints; i++)
     {
+        if (ints[i] == nullptr || *ints[i] == '\0')
+        {
+            continue;
+        }
         _ints.push_back(std::stoi(ints[i])); // TODO: More error checking here
     }
 }
