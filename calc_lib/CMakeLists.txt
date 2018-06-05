@@ -2,6 +2,8 @@
 
 set(LIB_SRCS
         src/IntStreamer.cpp
+        src/BaseEngine.cpp
+        src/MultiplierEngine.cpp
 )
 
 set(LIB_HEADERS

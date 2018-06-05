@@ -47,7 +47,7 @@ cengine::IntStreamer::IntStreamer(char **ints, int num_ints)
 {
     for (unsigned int i=0; i < num_ints; i++)
     {
-        _ints.push_back(std::stoi(ints[i]));
+        _ints.push_back(std::stoi(ints[i])); // TODO: More error checking here
     }
 
     for (auto i : _ints)

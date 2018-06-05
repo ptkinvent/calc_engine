@@ -9,9 +9,12 @@
 #include <iostream>
 #include <cstring>
 #include "IntStreamer.h"
+#include "BaseEngine.h"
 
 int main(int argc, char *argv[])
 {
+    cengine::IntStreamer *intStreamer;
+
     // Parse arguments
     // TODO: We could use something more robust like Boost here, but this will do for now
     if (argc < 3 || strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0)
@@ -25,11 +28,20 @@ int main(int argc, char *argv[])
     else if (argc == 3)
     {
         std::cout << "Main: Parsing a file" << std::endl;
-        cengine::IntStreamer *intStreamer = new cengine::IntStreamer(argv[2]);
+        intStreamer = new cengine::IntStreamer(argv[2]);
     }
     else
     {
         std::cout << "Main: Parsing a list of integers" << std::endl;
-        cengine::IntStreamer *intStreamer = new cengine::IntStreamer(argv+=2, argc-2);
+        intStreamer = new cengine::IntStreamer(argv+=2, argc-2);
     }
+
+    cengine::BaseEngine *e = cengine::BaseEngine::create(cengine::TYPE_MULT);
+    double result = e->calc(intStreamer->getInts());
+
+    std::cout << "Result: " << result << std::endl;
+
+    // Cleanup
+    delete intStreamer;
+    delete e;
 }

@@ -5,24 +5,18 @@
  * @brief Base engine class to inherit from
  */
 
-#ifndef CALC_BASE_ENGINE_H
-#define CALC_BASE_ENGINE_H
+#ifndef CALC_BASEENGINE_H
+#define CALC_BASEENGINE_H
+
+#include <vector>
+
 
 /**
  * @namespace cengine
+ * @brief Collection of classes belonging to calculation engine
  */
 namespace cengine
 {
-
-enum InputType
-{
-    FILE_LIST,    ///< Only accepts files
-    INT_LIST,     ///< Only accepts integer lists
-    FILE_INT_LIST ///< Accepts both files and integer lists
-};
-
-
-
 enum EngineType
 {
     /** Types */
@@ -42,20 +36,30 @@ class BaseEngine
 {
 public:
     /**
-     * Constructor
-     */
-    BaseEngine() = default; // TODO: Populate _inputType for base class?
-
-    /**
      * Performs the calculation for this calculation engine
      * @param prevTotal Output from the previous calculation
      * @param num New integer
      * @return New output after calculation
      */
-    virtual int calc(int prevTotal, int num) = 0;
+    virtual double calc(std::vector<int> ints) = 0;
 
-private:
-    InputType _inputType; ///< The type of input allowed for this
+    /**
+     * Factory method. Creates an engine of the given type
+     * @param e Engine type to create
+     * @return Newly created engine
+     */
+    static BaseEngine* create(EngineType e);
+
+protected:
+    /** Different input types allowed */
+    enum InputType
+    {
+        FILE_LIST,    ///< Only accepts files
+        INT_LIST,     ///< Only accepts integer lists
+        FILE_INT_LIST ///< Accepts both files and integer lists
+    };
+
+    InputType _inputType; ///< The type of input allowed for this engine
 };
 
 }

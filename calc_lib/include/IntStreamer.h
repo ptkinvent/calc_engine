@@ -35,6 +35,12 @@ public:
      */
     ~IntStreamer();
 
+    /**
+     * Returns the integers stored by IntStreamer
+     * @return Stored integers
+     */
+    std::vector<int> getInts() { return _ints; }
+
 private:
     std::vector<int> _ints;
 };
