@@ -7,6 +7,7 @@
 
 #include "BaseEngine.h"
 #include "MultiplierEngine.h"
+#include "DividerEngine.h"
 
 cengine::BaseEngine *cengine::BaseEngine::create(EngineType e)
 {
@@ -16,7 +17,7 @@ cengine::BaseEngine *cengine::BaseEngine::create(EngineType e)
             return new MultiplierEngine;
 
         case TYPE_DIV:
-            break;
+            return new DividerEngine;
 
         default:
             break;

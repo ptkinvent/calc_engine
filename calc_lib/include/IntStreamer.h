@@ -10,6 +10,7 @@
 
 #include <string>
 #include <vector>
+#include "BaseEngine.h"
 
 namespace cengine
 {
@@ -41,8 +42,15 @@ public:
      */
     std::vector<int> getInts() { return _ints; }
 
+    /**
+     * Returns the original type of integer array that was received
+     * @return Either file list or argument list
+     */
+    BaseEngine::InputType getInputType() { return _inputType; }
+
 private:
-    std::vector<int> _ints;
+    std::vector<int> _ints; ///< Vector of ints
+    BaseEngine::InputType _inputType; ///< Stores original type of the integer array
 };
 
 }

@@ -12,7 +12,7 @@
 
 cengine::MultiplierEngine::MultiplierEngine()
 {
-    _inputType = FILE_LIST;
+    _allowedInputType = FILE_LIST;
 }
 
 
@@ -32,7 +32,7 @@ double cengine::MultiplierEngine::calc(std::vector<int> ints)
         // Perform error checking
         if (total * i < total)
         {
-            std::cerr << "MultiplierEngine: Result has overflowed" << std::endl;
+            std::cerr << "MultiplierEngine: Result has overflowed, exiting" << std::endl;
             exit(1); // TODO: Is this the right way to do this?
         }
 

@@ -4,6 +4,7 @@ set(LIB_SRCS
         src/IntStreamer.cpp
         src/BaseEngine.cpp
         src/MultiplierEngine.cpp
+        src/DividerEngine.cpp
 )
 
 set(LIB_HEADERS

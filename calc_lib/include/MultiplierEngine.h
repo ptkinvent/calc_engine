@@ -23,15 +23,14 @@ class MultiplierEngine : public BaseEngine
 {
 public:
     /**
-     * Constructor. Sets the engine to require a file list as input
+     * Constructor. Sets this engine's behavior to require a file list as input
      */
     MultiplierEngine();
 
     /**
      * Multiplies the provided numbers together
-     * @param prevTotal Output from the previous calculation
-     * @param num New integer
-     * @return New output after multiplication
+     * @param ints List of integers
+     * @return Result after multiplication
      */
     virtual double calc(std::vector<int> ints);
 };

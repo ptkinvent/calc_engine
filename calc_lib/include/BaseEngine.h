@@ -17,24 +17,42 @@
  */
 namespace cengine
 {
-enum EngineType
-{
-    /** Types */
-    TYPE_MULT = 0,
-    TYPE_DIV,
-
-    /** Total number of types */
-    TYPE_NUM,
-
-    /** Invalid type */
-    TYPE_INVALID = 255,
-};
-
-
 
 class BaseEngine
 {
 public:
+    /**
+     * Engine types
+     */
+    enum EngineType
+    {
+        /** Types */
+        TYPE_MULT = 0,
+        TYPE_DIV,
+
+        /** Total number of types */
+        TYPE_NUM,
+
+        /** Invalid type */
+        TYPE_INVALID = 255,
+    };
+
+    /**
+     * Different input types allowed
+     */
+    enum InputType
+    {
+        FILE_LIST = 1, ///< Only accepts files
+        ARGS_LIST = 2, ///< Only accepts integer lists
+    };
+
+    /**
+     * Checks if the given input type matches this engine's allowed input type
+     * @param inputType File or argument input type
+     * @return True if passes check, false if fails
+     */
+    virtual bool checkInputType(InputType inputType) { return inputType & _allowedInputType; }
+
     /**
      * Performs the calculation for this calculation engine
      * @param prevTotal Output from the previous calculation
@@ -51,15 +69,12 @@ public:
     static BaseEngine* create(EngineType e);
 
 protected:
-    /** Different input types allowed */
-    enum InputType
-    {
-        FILE_LIST,    ///< Only accepts files
-        INT_LIST,     ///< Only accepts integer lists
-        FILE_INT_LIST ///< Accepts both files and integer lists
-    };
-
-    InputType _inputType; ///< The type of input allowed for this engine
+    /**
+     * The type of input allowed for this engine. NOTE: This does not enforce
+     * the best type safety here. Probably the enum itself should be classed
+     * and operator| and operator& should be overridden.
+     */
+    int _allowedInputType;
 };
 
 }
