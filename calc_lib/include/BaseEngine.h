@@ -49,11 +49,10 @@ public:
 
     /**
      * Performs the calculation for this calculation engine
-     * @param[in] ints Integers to calculate on
-     * @param[out] result Final result after calculation
+     * @param ints Integers to calculate on
      * @return Success state, 0 for success, 1 for fail
      */
-    virtual int calc(std::vector<int> ints, double &result) = 0;
+    virtual double calc(std::vector<int> ints) = 0;
 
     /**
      * Factory method. Creates an engine of the given type

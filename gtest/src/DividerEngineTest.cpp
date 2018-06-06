@@ -23,24 +23,20 @@ TEST_F(DividerEngineTest, creation)
  */
 TEST_F(DividerEngineTest, intResult)
 {
-    int ret;
     double result;
     std::vector<int> ints;
     ints.push_back(240);
 
     ints.push_back(6);
-    ret = _engine->calc(ints, result);
-    EXPECT_EQ(ret, 0) << "Division incorrect";
+    EXPECT_NO_THROW(result = _engine->calc(ints));
     EXPECT_EQ(result, 40);
 
     ints.push_back(8);
-    ret = _engine->calc(ints, result);
-    EXPECT_EQ(ret, 0) << "Division incorrect";
+    EXPECT_NO_THROW(result = _engine->calc(ints));
     EXPECT_EQ(result, 5);
 
     ints.push_back(5);
-    ret = _engine->calc(ints, result);
-    EXPECT_EQ(ret, 0) << "Division incorrect";
+    EXPECT_NO_THROW(result = _engine->calc(ints));
     EXPECT_EQ(result, 1);
 }
 
@@ -51,19 +47,16 @@ TEST_F(DividerEngineTest, intResult)
  */
 TEST_F(DividerEngineTest, floatResult)
 {
-    int ret;
     double result;
     std::vector<int> ints;
     ints.push_back(1);
 
     ints.push_back(5);
-    ret = _engine->calc(ints, result);
-    EXPECT_EQ(ret, 0);
+    EXPECT_NO_THROW(result = _engine->calc(ints));
     EXPECT_DOUBLE_EQ(result, 0.2);
 
     ints.push_back(20);
-    ret = _engine->calc(ints, result);
-    EXPECT_EQ(ret, 0);
+    EXPECT_NO_THROW(result = _engine->calc(ints));
     EXPECT_DOUBLE_EQ(result, 0.01);
 }
 
@@ -74,19 +67,16 @@ TEST_F(DividerEngineTest, floatResult)
  */
 TEST_F(DividerEngineTest, divByNegative)
 {
-    int ret;
     double result;
     std::vector<int> ints;
     ints.push_back(1);
 
     ints.push_back(-1);
-    ret = _engine->calc(ints, result);
-    EXPECT_EQ(ret, 0);
+    EXPECT_NO_THROW(result = _engine->calc(ints));
     EXPECT_EQ(result, -1);
 
     ints.push_back(-1);
-    ret = _engine->calc(ints, result);
-    EXPECT_EQ(ret, 0);
+    EXPECT_NO_THROW(result = _engine->calc(ints));
     EXPECT_EQ(result, 1);
 }
 
@@ -97,18 +87,27 @@ TEST_F(DividerEngineTest, divByNegative)
  */
 TEST_F(DividerEngineTest, divByZero)
 {
-    int ret;
     double result;
     std::vector<int> ints;
     ints.push_back(10);
 
     ints.push_back(5);
-    ret = _engine->calc(ints, result);
-    EXPECT_EQ(ret, 0);
+    EXPECT_NO_THROW(result = _engine->calc(ints));
     EXPECT_EQ(result, 2);
 
     ints.push_back(0);
-    ret = _engine->calc(ints, result);
-    EXPECT_EQ(result, -1);
-    EXPECT_EQ(ret, 1);
+    EXPECT_THROW(result = _engine->calc(ints), std::overflow_error);
+}
+
+
+
+/**
+ * Tests division of an empty list
+ */
+TEST_F(DividerEngineTest, divByEmpty)
+{
+    double result;
+    std::vector<int> ints;
+
+    EXPECT_THROW(result = _engine->calc(ints), std::invalid_argument);
 }

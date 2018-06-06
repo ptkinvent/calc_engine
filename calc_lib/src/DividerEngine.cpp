@@ -14,31 +14,36 @@ cengine::DividerEngine::DividerEngine()
 
 
 
-int cengine::DividerEngine::calc(std::vector<int> ints, double &result)
+double cengine::DividerEngine::calc(std::vector<int> ints)
 {
     if (ints.empty())
     {
-        std::cerr << "DividerEngine: No integers to divide" << std::endl;
-        return 1;
+        throw std::invalid_argument{"DividerEngine: No integers to divide"};
     }
 
+    // Total takes value of first entry
     double total(ints[0]);
 
+    // Divide total by every other entry
     for (unsigned int i=1; i<ints.size(); i++)
     {
+        int num = ints[i];
+
         // Perform error checking
-        if (ints[i] == 0)
+        if (num == 0)
         {
-            // TODO: Given more time, proper way to handle this is with an exception
-            std::cerr << "DividerEngine: Can't divide by zero" << std::endl;
-            result = -1;
-            return 1;
+            throw std::overflow_error{"DividerEngine: Division by zero exception"};
+        }
+
+        // Special behavior: If total reaches 0, no need to keep going
+        if (total == 0)
+        {
+            return total;
         }
 
         // Divide into total
-        total /= ints[i];
+        total /= num;
     }
 
-    result = total;
-    return 0;
+    return total;
 }

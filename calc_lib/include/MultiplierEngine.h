@@ -29,12 +29,16 @@ public:
     MultiplierEngine();
 
     /**
+     * Default destructor
+     */
+    ~MultiplierEngine() {};
+
+    /**
      * Multiplies the provided numbers together
-     * @param[in] ints Integers to calculate on
-     * @param[out] result Final result after calculation
+     * @param ints Integers to calculate on
      * @return Success state, 0 for success, 1 for fail
      */
-    virtual int calc(std::vector<int> ints, double &result);
+    virtual double calc(std::vector<int> ints);
 };
 
 }

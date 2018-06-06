@@ -2,8 +2,8 @@
  * @author P. Sahay
  * @date 6/3/18
  * @copyright P. Sahay
- * @brief An example of how a multiplier and divider engines can plug into
- *        the calculation engine API
+ * @brief An example of how different calculation engines can plug into the
+ *        the API
  * @details Produces an executable which can be run as
  * `calc <engine_name> <file_list>` or `calc <engine_name> <list of integers>`
  */
@@ -64,25 +64,44 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    // Construct the desired engine and run its calc() method
+    // Construct the desired engine
     cengine::BaseEngine *engine = cengine::BaseEngine::create(it->second);
+    if (!engine)
+    {
+        std::cerr << "Main: Engine does not exist, exiting" << std::endl;
+        return 1;
+    }
+
+    // Check its allowable input type
     if (!engine->checkInputType(intStreamer->getInputType()))
     {
         std::cerr << "Main: " << it->first << " does not accept this input type, exiting" << std::endl;
         return 1;
     }
+
+    // Run calc() method
     double result;
-    int ret = engine->calc(intStreamer->getInts(), result);
-    if (ret == 0)
+    try
     {
+        result = engine->calc(intStreamer->getInts());
         std::cout << "Main: Result: " << result << std::endl;
     }
-    else
+    catch(const std::invalid_argument &e)
     {
-        std::cout << "Main: Error in calculation engine" << std::endl;
+        std::cerr << e.what() << std::endl;
+        std::cout << "Main: Exception in calculation engine" << std::endl;
+    }
+    catch(const std::overflow_error &e)
+    {
+        std::cerr << e.what() << std::endl;
+        std::cout << "Main: Exception in calculation engine" << std::endl;
+    }
+    catch (...)
+    {
+        std::cout << "Main: Exception in calculation engine" << std::endl;
     }
 
-    // Cleanup
+    // Clean up
     delete intStreamer;
     delete engine;
 }

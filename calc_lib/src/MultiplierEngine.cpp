@@ -17,12 +17,11 @@ cengine::MultiplierEngine::MultiplierEngine()
 
 
 
-int cengine::MultiplierEngine::calc(std::vector<int> ints, double &result)
+double cengine::MultiplierEngine::calc(std::vector<int> ints)
 {
     if (ints.empty())
     {
-        std::cerr << "MultiplierEngine: No integers to multiply" << std::endl;
-        return 1;
+        throw std::invalid_argument{"MultiplierEngine: No integers to divide"};
     }
 
     double total(1);
@@ -32,22 +31,12 @@ int cengine::MultiplierEngine::calc(std::vector<int> ints, double &result)
         // Special behavior: If total reaches 0, no need to keep going
         if (total == 0)
         {
-            result = total;
-            return 0;
-        }
-
-        // Perform error checking
-        if (total * i < total)
-        {
-            std::cerr << "MultiplierEngine: Result has overflowed" << std::endl;
-            result = -1;
-            return 1;
+            return total;
         }
 
         // Multiply into total
         total *= i;
     }
 
-    result = total;
-    return 0;
+    return total;
 }

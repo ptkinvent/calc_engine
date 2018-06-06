@@ -38,9 +38,9 @@ public:
     IntStreamer(char **ints, int num_ints);
 
     /**
-     * Destructor
+     * Default destructor
      */
-    ~IntStreamer();
+    ~IntStreamer() {};
 
     /**
      * Returns the integers stored by IntStreamer
