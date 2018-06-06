@@ -1,9 +1,7 @@
 /**
  * @author P. Sahay
  * @date 6/4/18
- * @copyright Sikorsky Aircraft Corp.
- * @brief Engine that divides all its integers one after another. Works with
- *        both a file list and argument list.
+ * @copyright P. Sahay
  */
 
 #include <iostream>
@@ -31,6 +29,7 @@ int cengine::DividerEngine::calc(std::vector<int> ints, double &result)
         // Perform error checking
         if (ints[i] == 0)
         {
+            // TODO: Given more time, proper way to handle this is with an exception
             std::cerr << "DividerEngine: Can't divide by zero" << std::endl;
             result = -1;
             return 1;

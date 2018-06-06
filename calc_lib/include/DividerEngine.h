@@ -1,9 +1,7 @@
 /**
  * @author P. Sahay
  * @date 6/4/18
- * @copyright Sikorsky Aircraft Corp.
- * @brief Engine that divides all its integers one after another. Works with
- *        both a file list and argument list.
+ * @copyright P. Sahay
  */
 
 #ifndef CALC_DIVIDERENGINE_H
@@ -13,12 +11,15 @@
 
 
 /**
- * @namespace cengine
- * @brief Collection of classes belonging to calculation engine
+ * @brief Collection of classes belonging to calculation engine library
  */
 namespace cengine
 {
 
+/**
+ * @brief Engine that divides all its integers one after another
+ * @details Works with both a file list and argument list.
+ */
 class DividerEngine : public BaseEngine
 {
 public:

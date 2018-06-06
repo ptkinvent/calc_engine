@@ -2,7 +2,6 @@
  * @author P. Sahay
  * @date 6/3/18
  * @copyright P. Sahay
- * @brief Base engine class to inherit from
  */
 
 #ifndef CALC_BASEENGINE_H
@@ -12,12 +11,14 @@
 
 
 /**
- * @namespace cengine
- * @brief Collection of classes belonging to calculation engine
+ * @brief Collection of classes belonging to calculation engine library
  */
 namespace cengine
 {
 
+/**
+ * @brief Base engine class to inherit from
+ */
 class BaseEngine
 {
 public:
@@ -26,15 +27,8 @@ public:
      */
     enum EngineType
     {
-        /** Types */
-        TYPE_MULT = 0,
-        TYPE_DIV,
-
-        /** Total number of types */
-        TYPE_NUM,
-
-        /** Invalid type */
-        TYPE_INVALID = 255,
+        TYPE_MULT = 0, ///< Multiplier engine type
+        TYPE_DIV,      ///< Divider engine type
     };
 
     /**
@@ -42,8 +36,8 @@ public:
      */
     enum InputType
     {
-        FILE_LIST = 1, ///< Only accepts files
-        ARGS_LIST = 2, ///< Only accepts integer lists
+        FILE_LIST = 1, ///< Only accepts integer lists from files
+        ARGS_LIST = 2, ///< Only accepts integer lists from command line args
     };
 
     /**

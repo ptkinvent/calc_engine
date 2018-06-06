@@ -4,7 +4,7 @@ find_package(GTest REQUIRED)
 
 set(TEST_SRCS
         src/main.cpp
-        src/EngineTest.cpp
+        src/DividerEngineTest.cpp
 )
 
 include_directories(

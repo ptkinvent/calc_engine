@@ -29,8 +29,8 @@ int main(int argc, char *argv[])
     {
         // Print help
         std::cout << "Usage:" << std::endl
-                  << "    " << progArg << "<engine_name> <file_list>" << std::endl
-                  << "    " << progArg << "<engine_name> <list of integers>" << std::endl;
+                  << "    " << progArg << " <engine_name> <file>" << std::endl
+                  << "    " << progArg << " <engine_name> <list of integers>" << std::endl;
         return 0;
     }
     else if (argc == 3)

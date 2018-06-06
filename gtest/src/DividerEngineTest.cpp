@@ -1,29 +1,28 @@
 /**
  * @author P. Sahay
  * @date 6/5/18
- * @copyright Sikorsky Aircraft Corp.
- * @brief 
+ * @copyright P. Sahay
  */
 
-#include "EngineTest.h"
+#include "DividerEngineTest.h"
 
 
-TEST_F(EngineTest, creation)
+/**
+ * Tests proper creation of divider engine
+ */
+TEST_F(DividerEngineTest, creation)
 {
-    _engine = cengine::BaseEngine::create(cengine::BaseEngine::TYPE_DIV);
-
     EXPECT_TRUE(_engine->checkInputType(cengine::BaseEngine::InputType::FILE_LIST)) << "Allowed file type incorrect";
     EXPECT_TRUE(_engine->checkInputType(cengine::BaseEngine::InputType::ARGS_LIST)) << "Allowed file type incorrect";
-
-    delete _engine;
 }
 
 
 
-TEST_F(EngineTest, div)
+/**
+ * Tests basic division of by integers with integer results
+ */
+TEST_F(DividerEngineTest, intResult)
 {
-    _engine = cengine::BaseEngine::create(cengine::BaseEngine::TYPE_DIV);
-
     int ret;
     double result;
     std::vector<int> ints;
@@ -31,28 +30,50 @@ TEST_F(EngineTest, div)
 
     ints.push_back(6);
     ret = _engine->calc(ints, result);
-    EXPECT_EQ(ret, 0);
+    EXPECT_EQ(ret, 0) << "Division incorrect";
     EXPECT_EQ(result, 40);
 
     ints.push_back(8);
     ret = _engine->calc(ints, result);
-    EXPECT_EQ(ret, 0);
+    EXPECT_EQ(ret, 0) << "Division incorrect";
     EXPECT_EQ(result, 5);
 
     ints.push_back(5);
     ret = _engine->calc(ints, result);
-    EXPECT_EQ(ret, 0);
+    EXPECT_EQ(ret, 0) << "Division incorrect";
     EXPECT_EQ(result, 1);
-
-    delete _engine;
 }
 
 
 
-TEST_F(EngineTest, divByNegative)
+/**
+ * Tests division with floating point result
+ */
+TEST_F(DividerEngineTest, floatResult)
 {
-    _engine = cengine::BaseEngine::create(cengine::BaseEngine::TYPE_DIV);
+    int ret;
+    double result;
+    std::vector<int> ints;
+    ints.push_back(1);
 
+    ints.push_back(5);
+    ret = _engine->calc(ints, result);
+    EXPECT_EQ(ret, 0);
+    EXPECT_DOUBLE_EQ(result, 0.2);
+
+    ints.push_back(20);
+    ret = _engine->calc(ints, result);
+    EXPECT_EQ(ret, 0);
+    EXPECT_DOUBLE_EQ(result, 0.01);
+}
+
+
+
+/**
+ * Tests division by negative numbers
+ */
+TEST_F(DividerEngineTest, divByNegative)
+{
     int ret;
     double result;
     std::vector<int> ints;
@@ -67,16 +88,15 @@ TEST_F(EngineTest, divByNegative)
     ret = _engine->calc(ints, result);
     EXPECT_EQ(ret, 0);
     EXPECT_EQ(result, 1);
-
-    delete _engine;
 }
 
 
 
-TEST_F(EngineTest, divByZero)
+/**
+ * Tests division by 0
+ */
+TEST_F(DividerEngineTest, divByZero)
 {
-    _engine = cengine::BaseEngine::create(cengine::BaseEngine::TYPE_DIV);
-
     int ret;
     double result;
     std::vector<int> ints;
@@ -91,6 +111,4 @@ TEST_F(EngineTest, divByZero)
     ret = _engine->calc(ints, result);
     EXPECT_EQ(result, -1);
     EXPECT_EQ(ret, 1);
-
-    delete _engine;
 }

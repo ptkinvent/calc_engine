@@ -33,7 +33,6 @@ cengine::IntStreamer::IntStreamer(const std::string &filename) : _inputType(Base
             continue;
         }
         _ints.push_back((int) num);
-        std::cout << "Pushing back " << num << std::endl;
     }
 
     // Close the file

@@ -2,8 +2,6 @@
  * @author P. Sahay
  * @date 6/4/18
  * @copyright P. Sahay
- * @brief Engine that multiplies all its integers together. Only works with a
- *        file list as input data
  */
 
 #ifndef CALC_MULTIPLIERENGINE_H
@@ -13,12 +11,15 @@
 
 
 /**
- * @namespace cengine
- * @brief Collection of classes belonging to calculation engine
+ * @brief Collection of classes belonging to calculation engine library
  */
 namespace cengine
 {
 
+/**
+ * @brief Engine that multiplies all its integers together
+ * @details Only works with a file list as input data
+ */
 class MultiplierEngine : public BaseEngine
 {
 public:

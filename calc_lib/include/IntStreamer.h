@@ -2,7 +2,6 @@
  * @author P. Sahay
  * @date 6/3/18
  * @copyright P. Sahay
- * @brief Reads in a stream of integers and supplies them using getNext()
  */
 
 #ifndef CALC_INT_STREAMER_H
@@ -12,9 +11,16 @@
 #include <vector>
 #include "BaseEngine.h"
 
+
+/**
+ * @brief Collection of classes belonging to calculation engine library
+ */
 namespace cengine
 {
 
+/**
+ * @brief Reads in a stream of integers and stores them for easy retrieval
+ */
 class IntStreamer
 {
 public:
@@ -29,7 +35,7 @@ public:
      * @param ints Character array of numbers
      * @param num_ints Size of character array
      */
-    IntStreamer(char **ints, int num_ints); // TODO: Make this take a char array?
+    IntStreamer(char **ints, int num_ints);
 
     /**
      * Destructor

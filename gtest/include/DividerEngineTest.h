@@ -1,8 +1,7 @@
 /**
  * @author P. Sahay
  * @date 6/5/18
- * @copyright Sikorsky Aircraft Corp.
- * @brief 
+ * @copyright P. Sahay
  */
 
 #ifndef CALC_ENGINETEST_H
@@ -13,20 +12,19 @@
 
 
 /**
- * @class EngineTest
  * @brief GTest fixture for calculation engine
  */
-class EngineTest : public ::testing::Test
+class DividerEngineTest : public ::testing::Test
 {
 protected:
     void SetUp()
     {
-
+        _engine = cengine::BaseEngine::create(cengine::BaseEngine::TYPE_DIV);
     }
 
     void TearDown()
     {
-
+        delete _engine;
     }
 
     cengine::BaseEngine *_engine;
