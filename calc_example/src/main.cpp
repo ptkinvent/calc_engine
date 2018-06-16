@@ -18,7 +18,6 @@
 int main(int argc, char *argv[])
 {
     const std::string progArg = argv[0]; // Executable name
-    const std::string engineArg = argv[1]; // Desired engine type
     cengine::BaseEngine::InputType inputType;
     cengine::IntStreamer *intStreamer;
 
@@ -52,6 +51,7 @@ int main(int argc, char *argv[])
     };
 
     // Find the desired engine in the map
+    const std::string engineArg = argv[1];
     auto it = umap.find(engineArg);
     if (it == umap.end())
     {
