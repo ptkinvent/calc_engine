@@ -9,6 +9,7 @@
  */
 
 #include <iostream>
+#include <memory>
 #include <cstring>
 #include <unordered_map>
 #include "IntStreamer.h"
@@ -19,7 +20,7 @@ int main(int argc, char *argv[])
 {
     const std::string progArg = argv[0]; // Executable name
     cengine::BaseEngine::InputType inputType;
-    cengine::IntStreamer *intStreamer;
+    std::shared_ptr<cengine::IntStreamer> intStreamer;
 
     // Parse arguments
     // NOTE: We could use something like Boost here for more robust arg parsing,
@@ -35,12 +36,12 @@ int main(int argc, char *argv[])
     else if (argc == 3)
     {
         // Pass the file name to IntStreamer
-        intStreamer = new cengine::IntStreamer(argv[2]);
+        intStreamer = std::make_shared<cengine::IntStreamer>(argv[2]);
     }
     else
     {
         // Pass the char* array slice containing the integers and its length
-        intStreamer = new cengine::IntStreamer(argv+2, argc-2);
+        intStreamer = std::make_shared<cengine::IntStreamer>(argv+2, argc-2);
     }
 
     // Create mapping from strings to engine types
@@ -65,7 +66,7 @@ int main(int argc, char *argv[])
     }
 
     // Construct the desired engine
-    cengine::BaseEngine *engine = cengine::BaseEngine::create(it->second);
+    std::shared_ptr<cengine::BaseEngine> engine = cengine::BaseEngine::create(it->second);
     if (!engine)
     {
         std::cerr << "Main: Engine does not exist, exiting" << std::endl;
@@ -100,8 +101,4 @@ int main(int argc, char *argv[])
     {
         std::cout << "Main: Exception in calculation engine" << std::endl;
     }
-
-    // Clean up
-    delete intStreamer;
-    delete engine;
 }

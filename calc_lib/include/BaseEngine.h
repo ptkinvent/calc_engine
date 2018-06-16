@@ -8,6 +8,7 @@
 #define CALC_BASEENGINE_H
 
 #include <vector>
+#include <memory>
 
 
 /**
@@ -59,7 +60,7 @@ public:
      * @param e Engine type to create
      * @return Newly created engine
      */
-    static BaseEngine* create(EngineType e);
+    static std::shared_ptr<BaseEngine> create(EngineType e);
 
 protected:
     /**

@@ -9,15 +9,15 @@
 #include "MultiplierEngine.h"
 #include "DividerEngine.h"
 
-cengine::BaseEngine *cengine::BaseEngine::create(EngineType e)
+std::shared_ptr<cengine::BaseEngine> cengine::BaseEngine::create(EngineType e)
 {
     switch (e)
     {
         case TYPE_MULT:
-            return new MultiplierEngine;
+            return std::make_shared<MultiplierEngine>();
 
         case TYPE_DIV:
-            return new DividerEngine;
+            return std::make_shared<DividerEngine>();
 
         default:
             break;

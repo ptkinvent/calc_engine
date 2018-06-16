@@ -24,10 +24,9 @@ protected:
 
     void TearDown()
     {
-        delete _engine;
     }
 
-    cengine::BaseEngine *_engine;
+    std::shared_ptr<cengine::BaseEngine> _engine;
 };
 
 
